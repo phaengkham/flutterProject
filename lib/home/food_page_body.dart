@@ -129,7 +129,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BigText(text: "ອາຫານເດັກ"),
+                  BigText(text: "ອາຫານເສີມ"),
                   SizedBox(height: 10),
                   Row(
                     children: [
