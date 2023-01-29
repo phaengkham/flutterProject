@@ -129,7 +129,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BigText(text: "ອາຫານເສີມ"),
+                  BigText(text: "ອາຫານເດັກ"),
                   SizedBox(height: 10),
                   Row(
                     children: [
@@ -162,12 +162,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       SizedBox(width: 10),
                       IconText(
                           pIcon: Icons.location_on,
-                          pText: "172.95",
+                          pText: "199.95",
                           pIconcolor: AppColors.mainColor),
                       SizedBox(width: 10),
                       IconText(
                           pIcon: Icons.access_time_rounded,
-                          pText: "32",
+                          pText: "19",
                           pIconcolor: AppColors.iconColor2)
                     ],
                   )
