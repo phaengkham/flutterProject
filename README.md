@@ -4,7 +4,8 @@ A new Flutter project.
 my name is phaengkham my wife name is la and my kid name is baby, 
 now I came to work in Vientiane so I miss my familly so much.
 I will payatention to learn flutter for make my work get me much salary,
-flutter, you love me, please. 
+flutter, you love me, please.
+my baby I miss you so much, I will go to visit you in this month
 
 ## Getting Started
 
