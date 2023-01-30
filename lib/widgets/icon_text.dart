@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/styles/dimension.dart';
 import 'package:ecommerce_app/widgets/small_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -21,6 +22,7 @@ class IconText extends StatelessWidget {
         Icon(
           pIcon,
           color: pIconcolor,
+          size: Dimension.iconSize24,
         ),
         SizedBox(
           height: 5,

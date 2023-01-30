@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/home/food_page_body.dart';
 import 'package:ecommerce_app/styles/appColors.dart';
+import 'package:ecommerce_app/styles/dimension.dart';
 import 'package:ecommerce_app/widgets/big_text.dart';
 import 'package:ecommerce_app/widgets/small_text.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,48 +21,58 @@ class _MainFoodPageState extends State<MainFoodPage> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            child: Container(
-              margin: EdgeInsets.only(top: 45, bottom: 15),
-              padding: EdgeInsets.only(left: 20, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      BigText(text: "ນະຄອນຫຼວງວຽງຈັນ"),
-                      Row(
-                        children: [
-                          SmallText(
-                            text: "ປະເທດລາວ",
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.arrow_drop_down_rounded),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                  Center(
-                    child: Container(
-                      width: 45,
-                      height: 45,
-                      child: Icon(
-                        Icons.search,
-                        color: Colors.white,
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: AppColors.mainColor),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          FoodPageBody()
+          textBar(),
+          Expanded(
+              child: SingleChildScrollView(
+            child: FoodPageBody(),
+          ))
         ],
+      ),
+    );
+  }
+
+  Container textBar() {
+    return Container(
+      child: Container(
+        margin: EdgeInsets.only(
+            top: Dimension.height45, bottom: Dimension.height15),
+        padding:
+            EdgeInsets.only(left: Dimension.width20, right: Dimension.width20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                BigText(text: "ນະຄອນຫຼວງວຽງຈັນ"),
+                Row(
+                  children: [
+                    SmallText(
+                      text: "ປະເທດລາວ",
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.arrow_drop_down_rounded),
+                    ),
+                  ],
+                )
+              ],
+            ),
+            Center(
+              child: Container(
+                width: Dimension.height45,
+                height: Dimension.height45,
+                child: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                  size: Dimension.iconSize24,
+                ),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimension.radius15),
+                    color: AppColors.mainColor),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:ecommerce_app/styles/appColors.dart';
+import 'package:ecommerce_app/styles/dimension.dart';
 import 'package:ecommerce_app/widgets/big_text.dart';
 import 'package:ecommerce_app/widgets/icon_text.dart';
 import 'package:ecommerce_app/widgets/small_text.dart';
@@ -19,7 +20,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currPageValue = 0.0;
   double _scalefactor = 0.8;
-  double _height = 220;
+  double _height = Dimension.pageViewContainer;
   @override
   void initState() {
     super.initState();
@@ -39,28 +40,138 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          //color: AppColors.mainColor,
-          height: 320,
-          child: PageView.builder(
-              controller: pageController,
-              itemCount: 5,
-              itemBuilder: (context, position) {
-                return _buildPageitem(position);
-              }),
+        listMenuVertical(),
+        dotAnimation(),
+        SizedBox(
+          height: Dimension.height30,
         ),
-        new DotsIndicator(
-          dotsCount: 5,
-          position: _currPageValue,
-          decorator: DotsDecorator(
-            activeColor: AppColors.mainColor,
-            size: const Size.square(9.0),
-            activeSize: const Size(18.0, 9.0),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
-          ),
-        )
+        popularText(),
+        listMenuHorizontal()
       ],
+    );
+  }
+
+  DotsIndicator dotAnimation() {
+    return new DotsIndicator(
+      dotsCount: 5,
+      position: _currPageValue,
+      decorator: DotsDecorator(
+        activeColor: AppColors.mainColor,
+        size: const Size.square(9.0),
+        activeSize: const Size(18.0, 9.0),
+        activeShape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+      ),
+    );
+  }
+
+  Container popularText() {
+    return Container(
+      margin: EdgeInsets.only(left: Dimension.width30),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          BigText(text: "ອາຫານຍອດນິຍົມ"),
+          Container(
+            //margin: EdgeInsets.only(bottom: 1),
+            child: BigText(
+              text: ".",
+              color: AppColors.mainBlack,
+            ),
+          ),
+          SizedBox(
+            width: Dimension.width10,
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 8),
+            child: SmallText(
+              text: "ຈັດຄູ່ອາຫານ",
+            ),
+          ),
+          // food and images
+        ],
+      ),
+    );
+  }
+
+  Container listMenuVertical() {
+    return Container(
+      //color: AppColors.mainColor,
+      height: Dimension.pageView,
+      child: PageView.builder(
+          controller: pageController,
+          itemCount: 5,
+          itemBuilder: (context, position) {
+            return _buildPageitem(position);
+          }),
+    );
+  }
+
+  Container listMenuHorizontal() {
+    return Container(
+      child: ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: EdgeInsets.only(
+                  left: Dimension.width20,
+                  right: Dimension.width20,
+                  bottom: Dimension.height10),
+              child: Row(
+                children: [
+                  Container(
+                    height: Dimension.listViewImagesize,
+                    width: Dimension.listViewImagesize,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        Dimension.radius20,
+                      ),
+                      color: AppColors.whiteColor,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage("assets/images/food11.png"),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: Dimension.listViewTextContSize,
+                      height: Dimension.listViewTextContSize,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(Dimension.radius20),
+                            bottomRight: Radius.circular(
+                              Dimension.radius20,
+                            )),
+                        color: AppColors.buttonBackgroudColor,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: Dimension.width10, right: Dimension.width10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            BigText(text: "ອາຫານທໍາມະຊາດອາຫານສົດ"),
+                            SizedBox(
+                              height: Dimension.height10,
+                            ),
+                            SmallText(text: "ອາຫານທໍາມະຊາດແມ່ນອາຫານປອດເຄມີ"),
+                            SizedBox(
+                              height: Dimension.height10,
+                            ),
+                            iconText()
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          }),
     );
   }
 
@@ -93,10 +204,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       transform: matrix4,
       child: Stack(children: [
         Container(
-          height: 220,
-          margin: EdgeInsets.only(left: 5, right: 5),
+          height: Dimension.pageViewContainer,
+          margin: EdgeInsets.only(
+              left: Dimension.width10, right: Dimension.width10),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(Dimension.radius30),
             color: index.isEven ? AppColors.iconColor1 : AppColors.iconColor2,
             image: DecorationImage(
               fit: BoxFit.cover,
@@ -107,10 +219,13 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            height: 120,
-            margin: EdgeInsets.only(left: 30, right: 30, bottom: 15),
+            height: Dimension.pageTextContainer,
+            margin: EdgeInsets.only(
+                left: Dimension.width30,
+                right: Dimension.width30,
+                bottom: Dimension.height30),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(Dimension.radius20),
                 color: AppColors.whiteColor,
                 boxShadow: [
                   BoxShadow(
@@ -125,12 +240,13 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   )
                 ]),
             child: Container(
-              padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+              padding:
+                  EdgeInsets.only(left: 15, right: 15, top: Dimension.height10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BigText(text: "ອາຫານເສີມ"),
-                  SizedBox(height: 10),
+                  SizedBox(height: Dimension.height10),
                   Row(
                     children: [
                       Wrap(
@@ -151,32 +267,36 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       SmallText(text: "ຄໍາເຫັນ")
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconText(
-                          pIcon: Icons.circle_sharp,
-                          pText: "Nomal",
-                          pIconcolor: AppColors.yellowColor),
-                      SizedBox(width: 10),
-                      IconText(
-                          pIcon: Icons.location_on,
-                          pText: "199.95",
-                          pIconcolor: AppColors.mainColor),
-                      SizedBox(width: 10),
-                      IconText(
-                          pIcon: Icons.access_time_rounded,
-                          pText: "19",
-                          pIconcolor: AppColors.iconColor2)
-                    ],
-                  )
+                  SizedBox(height: Dimension.height10),
+                  iconText()
                 ],
               ),
             ),
           ),
         ),
       ]),
+    );
+  }
+
+  Row iconText() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        IconText(
+            pIcon: Icons.circle_sharp,
+            pText: "Nomal",
+            pIconcolor: AppColors.yellowColor),
+        SizedBox(width: Dimension.width10),
+        IconText(
+            pIcon: Icons.location_on,
+            pText: "199.95",
+            pIconcolor: AppColors.mainColor),
+        SizedBox(width: Dimension.width10),
+        IconText(
+            pIcon: Icons.access_time_rounded,
+            pText: "19",
+            pIconcolor: AppColors.iconColor2)
+      ],
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/styles/appColors.dart';
+import 'package:ecommerce_app/styles/dimension.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +16,8 @@ class BigText extends StatelessWidget {
       {Key? key,
       this.color = const Color(0xFF89dad0),
       required this.text,
-      this.overflow = TextOverflow.ellipsis,
-      this.size = 18})
+      this.overflow = TextOverflow.fade,
+      this.size = 0})
       : super(key: key);
 
   @override
@@ -29,7 +30,7 @@ class BigText extends StatelessWidget {
           fontFamily: 'NotoSansLao',
           color: color,
           fontWeight: FontWeight.w400,
-          fontSize: size),
+          fontSize: size == 0 ? Dimension.font20 : size),
     );
   }
 }
