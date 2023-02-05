@@ -1,8 +1,13 @@
-import 'package:ecommerce_app/home/main_food_page.dart';
+import 'package:ecommerce_app/page/food/popular_food_detail.dart';
+import 'package:ecommerce_app/page/food/recommended_food_detail.dart';
+import 'package:ecommerce_app/page/home/main_food_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'helper/dependencies.dart' as dep;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dep.init();
   runApp(const myApp());
 }
 
@@ -14,7 +19,7 @@ class myApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'flutter_appa',
-      home: MainFoodPage(),
+      home: RecommenedFoodDetail(),
     );
   }
 }
